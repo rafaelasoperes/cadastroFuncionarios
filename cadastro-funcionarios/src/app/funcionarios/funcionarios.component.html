@@ -1,0 +1,39 @@
+<div>
+  <h2>Lista de Funcionários</h2>
+  <table>
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Gênero</th>
+        <th>Telefone</th>
+        <th>Nascimento</th>
+        <th>Estado Civil</th>
+        <th>Rua</th>
+        <th>Número</th>
+        <th>Complemento</th>
+        <th>Bairro</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let funcionario of funcionarios">
+        <td>{{ funcionario.id }}</td>
+        <td>{{ funcionario.nome }}</td>
+        <td>{{ funcionario.genero }}</td>
+        <td>{{ funcionario.telefone }}</td>
+        <td>{{ funcionario.nascimento | date }}</td>
+        <td>{{ funcionario.estadocivil }}</td>
+        <td>{{ funcionario.rua }}</td>
+        <td>{{ funcionario.numero }}</td>
+        <td>{{ funcionario.complemento }}</td>
+        <td>{{ funcionario.bairro }}</td>
+        <td>
+          <button (click)="deleteFuncionario(funcionario.id)">Excluir</button>
+          <button [routerLink]="['/funcionarios/edit', funcionario.id]">Editar</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+  <button [routerLink]="['/funcionarios/add']">Adicionar Funcionário</button>
+</div>
