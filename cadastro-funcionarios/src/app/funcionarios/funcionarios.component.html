@@ -1,39 +1,24 @@
-<div>
-  <h2>Lista de Funcionários</h2>
-  <table>
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Nome</th>
-        <th>Gênero</th>
-        <th>Telefone</th>
-        <th>Nascimento</th>
-        <th>Estado Civil</th>
-        <th>Rua</th>
-        <th>Número</th>
-        <th>Complemento</th>
-        <th>Bairro</th>
-        <th>Ações</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let funcionario of funcionarios">
-        <td>{{ funcionario.id }}</td>
-        <td>{{ funcionario.nome }}</td>
-        <td>{{ funcionario.genero }}</td>
-        <td>{{ funcionario.telefone }}</td>
-        <td>{{ funcionario.nascimento | date }}</td>
-        <td>{{ funcionario.estadocivil }}</td>
-        <td>{{ funcionario.rua }}</td>
-        <td>{{ funcionario.numero }}</td>
-        <td>{{ funcionario.complemento }}</td>
-        <td>{{ funcionario.bairro }}</td>
-        <td>
-          <button (click)="deleteFuncionario(funcionario.id)">Excluir</button>
-          <button [routerLink]="['/funcionarios/edit', funcionario.id]">Editar</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  <button [routerLink]="['/funcionarios/add']">Adicionar Funcionário</button>
+<!-- Esse component fica responsavel por trazer a lista com todos os funcionarios, alem de trazer tambem os botões que vão interagir com as outras paginas. -->
+<div class="container">
+  <div *ngIf="funcionarios.length === 0; else funcionariosList" class="no-funcionarios">
+    Nenhum funcionário cadastrado.
+  </div>
+  <ng-template #funcionariosList>
+    <div class="cards-container">
+      <mat-card *ngFor="let funcionario of funcionarios" class="funcionario-card">
+        <mat-card-header>
+          <mat-card-title class="titulo">{{ funcionario.nome }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-actions class="btGroup">
+          <button mat-flat-button class="btOptions" color="primary"
+          [routerLink]="['/funcionario', funcionario.id]">Visualizar</button>
+          <button mat-flat-button class="btOptions" color="accent"
+          [routerLink]="['/funcionarios/edit', funcionario.id]">Editar</button>
+          <button mat-flat-button class="btOptions" color="warn" (click)="deleteFuncionario(funcionario.id)">Excluir</button>
+        </mat-card-actions>
+      </mat-card>
+    </div>
+    <button mat-raised-button class="btAdd" color="primary" [routerLink]="['/funcionarios/add']">Adicionar Funcionário</button>
+  </ng-template>
 </div>
+

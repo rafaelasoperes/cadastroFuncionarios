@@ -1,4 +1,60 @@
-.error {
-  color: red;
-  font-size: 0.8em;
+
+/* estilo do formulário */
+.formulario {
+  margin: 20px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Estilo para o card */
+.container-campos {
+  padding: 16px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Ajustando o estilo das seções do formulário */
+.form-section,
+.address-section {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* Estilo para os campos de formulário */
+.campos-form {
+  width: 100%;
+}
+
+/* Estilo para o botão de enviar e o botão de voltar */
+.btGroup {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 16px;
+}
+
+/* Estilo para o botão de enviar */
+.btEnviar[type="submit"] {
+  background-color: #4caf50;
+  color: white;
+  font-weight: bold;
+}
+
+/* Estilo para o botão de voltar */
+.btReturn[routerLink] {
+  background-color: #2196f3;
+  color: white;
+  font-weight: bold;
+}
+
+/* Estilo para mensagens de erro */
+.message-err {
+  color: #f44336;
+}
+
+/* Ajuste o padding e margin do mat-card-content se necessário */
+mat-card-content {
+  padding: 16px;
 }

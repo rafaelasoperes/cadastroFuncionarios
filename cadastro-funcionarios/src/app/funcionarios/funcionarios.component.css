@@ -1,0 +1,56 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  padding: 20px;
+  gap: 16px;
+}
+
+.cards-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 16px;
+  width: 100%;
+  max-width: 600px;
+}
+
+.funcionario-card {
+  width: 100%;
+
+}
+
+.titulo {
+  font-size: 25px;
+}
+
+.btGroup {
+  width: 50%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.btOptions{
+  width: 150px;
+  height: 30px;
+  font-size: 12px;
+  margin:10px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btOptions:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.btAdd {
+  top: 30px;
+  bottom: 30px;
+  align-items: center;
+}
+
+.no-funcionarios {
+  text-align: center;
+  font-size: 18px;
+  color: #757575;
+  margin-bottom: 20px;
+}

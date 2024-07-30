@@ -9,6 +9,8 @@ export interface Funcionario {
   numero?: number;
   complemento?: string;
   bairro?: string;
+  cidade?: string;
+  estado?: string;
 }
 
 

@@ -1,27 +1,34 @@
-// criando uma requisição para utilizar o express
 const express = require('express');
-// utilizando o express para controlar as rotas
 const router = express.Router();
-
+const multer = require('multer');
+const path = require('path');
 
 const cadastroController = require('./controllers/cadastroControllers');
 
-//Buscando todos os dados do banco
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'uploads/');
+    },
+    filename: (req, file, cb) => {
+        cb(null, Date.now() + path.extname(file.originalname));
+    }
+});
+
+const upload = multer({ storage: storage });
+
+// Buscando todos os dados do banco
 router.get('/funcionarios', cadastroController.buscarDados);
 
-//Buscando apenas um funcionario
+// Buscando apenas um funcionario
 router.get('/funcionario/:id', cadastroController.buscarFuncionario);
 
-//Enviando um novo cadastro de funcionario
-router.post('/funcionario', cadastroController.inserir);
+// Enviando um novo cadastro de funcionario com imagem
+router.post('/funcionario', upload.single('imagem'), cadastroController.inserir);
 
-//Alterando algum cadastro
-router.put('/funcionario/:id', cadastroController.alterar);
+// Alterando algum cadastro com imagem
+router.put('/funcionario/:id', upload.single('imagem'), cadastroController.alterar);
 
-//Excluindo algum cadastro
+// Excluindo algum cadastro
 router.delete('/funcionario/:id', cadastroController.excluir);
 
-
-
-// Exportando as rotas
 module.exports = router;

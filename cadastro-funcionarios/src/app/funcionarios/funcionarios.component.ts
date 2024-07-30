@@ -12,25 +12,22 @@ export class FuncionariosComponent implements OnInit {
   constructor(private funcionariosService: FuncionariosService) {}
 
   ngOnInit(): void {
+    this.funcionariosService.setTitle('Lista Funcionários');
     this.fetchFuncionarios();
   }
 
   fetchFuncionarios(): void {
     this.funcionariosService.getFuncionarios().subscribe(
       (data: any[]) => {
-        this.funcionarios = data; // Atualiza a lista de funcionários com o array recebido
-      },
-      error => {
-        console.error('Erro ao buscar funcionários', error);
+        this.funcionarios = data; // Atualizo a lista de funcionários com o novo array recebido
       }
     );
   }
 
+  //Deleto o funcionario escolhido
   deleteFuncionario(id: number): void {
     this.funcionariosService.deleteFuncionario(id).subscribe(() => {
       this.fetchFuncionarios();
-    }, error => {
-      console.error('Erro ao excluir funcionário', error);
     });
   }
 }

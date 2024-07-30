@@ -1,0 +1,18 @@
+<!-- Esse component fica responsavel por disponibilizar a pagina que vai ter apenas 1 funcionario -->
+
+<div *ngIf="funcionario">
+  <h6>{{ funcionario.nome }}</h6>
+  <p class="campos-form"><strong>Nascimento:</strong> {{ funcionario.nascimento | date }}</p>
+  <p class="campos-form"><strong>Telefone:</strong> {{ funcionario.telefone }}</p>
+  <p class="campos-form"><strong>Gênero:</strong> {{ funcionario.genero }}</p>
+  <p class="campos-form"><strong>Estado Civil:</strong> {{ funcionario.estadocivil }}</p>
+  <p class="campos-form"><strong>Rua:</strong> {{ funcionario.rua }}</p>
+  <p class="campos-form"><strong>Número:</strong> {{ funcionario.numero }}</p>
+  <p class="campos-form"><strong>Complemento:</strong> {{ funcionario.complemento }}</p>
+  <p class="campos-form"><strong>Bairro:</strong> {{ funcionario.bairro }}</p>
+  <p class="campos-form"><strong>Cidade:</strong> {{ funcionario.cidade }}</p>
+  <p class="campos-form"><strong>Estado:</strong> {{ funcionario.estado }}</p>
+  <mat-card-actions class="btGroup">
+    <button mat-flat-button class="btReturn" color="primary" [routerLink]="['/funcionarios']">Voltar</button>
+  </mat-card-actions>
+</div>

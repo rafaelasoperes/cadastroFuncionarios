@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Funcionario, ApiResponse } from './models/funcionario.model';
 
@@ -11,6 +11,14 @@ export class FuncionariosService {
   private apiUrl = 'http://localhost:3000/api';
 
   constructor(private http: HttpClient) {}
+
+  private titleSource = new BehaviorSubject<string>('Informações');
+  currentTitle = this.titleSource.asObservable();
+
+  // Método para definir o título
+  setTitle(title: string) {
+    this.titleSource.next(title);
+  }
 
   getFuncionarios(): Observable<Funcionario[]> {
     return this.http.get<ApiResponse>(`${this.apiUrl}/funcionarios`).pipe(
@@ -27,7 +35,6 @@ export class FuncionariosService {
   addFuncionario(funcionario: Funcionario): Observable<Funcionario> {
     return this.http.post<{ error: string, result: Funcionario }>(`${this.apiUrl}/funcionario`, funcionario).pipe(
       map(response => {
-        console.log('Resposta da API para adição:', response);  // Log da resposta
         return response.result;
       })
     );

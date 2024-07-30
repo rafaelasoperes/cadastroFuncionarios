@@ -1,1 +1,13 @@
-<router-outlet></router-outlet>
+<!-- Aqui no app.component fica como uma pagina dinâmica, que tras as outras paginas por conta do <router-outlet></router-outlet> -->
+<div class="full-screen-container">
+  <mat-card class="centered-card">
+    <mat-card-header>
+      <mat-card-title class="titulo">{{ title }}</mat-card-title>
+    </mat-card-header>
+    <mat-card-content>
+      <router-outlet></router-outlet>
+    </mat-card-content>
+  </mat-card>
+</div>
+
+

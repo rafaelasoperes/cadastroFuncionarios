@@ -1,0 +1,23 @@
+
+.full-screen-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: auto;
+  width: 100vw;
+  background-color: #90B1DB;
+  padding: 56px;
+}
+
+.centered-card {
+  width: 80%;
+  height: auto;
+  padding: 16px;
+  background-color: #f5f5f5;
+}
+
+.titulo {
+  margin-bottom: 26px;
+  font-size: 30px;
+}
+

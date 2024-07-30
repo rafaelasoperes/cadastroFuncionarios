@@ -3,7 +3,6 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FuncionariosService } from '../funcionarios.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Funcionario } from '../models/funcionario.model';
-
 @Component({
   selector: 'app-funcionario-form',
   templateUrl: './funcionario-form.component.html',
@@ -13,6 +12,7 @@ export class FuncionarioFormComponent implements OnInit {
   funcionarioForm: FormGroup;
   isEditMode: boolean = false;
   funcionarioId!: number;
+  generos: string[] = ['Masculino', 'Feminino', 'Outros'];
 
   constructor(
     private route: ActivatedRoute,
@@ -29,32 +29,39 @@ export class FuncionarioFormComponent implements OnInit {
       rua: [''],
       numero: [''],
       complemento: [''],
-      bairro: ['']
+      bairro: [''],
+      cidade: [''],
+      estado: ['']
     });
   }
 
   ngOnInit(): void {
+
     this.route.params.subscribe(params => {
       if (params['id']) {
         this.isEditMode = true;
         this.funcionarioId = +params['id'];
         this.funcionariosService.getFuncionario(this.funcionarioId).subscribe(
           data => {
-            // Verifique e converta o campo nascimento se necessário
-            const nascimento = data.nascimento ? this.formatDate(data.nascimento) : null;
+            // Verifica e converte o campo nascimento se necessário
+            const nascimento = data.nascimento ? new Date(data.nascimento) : null;
             this.funcionarioForm.patchValue({
               ...data,
               nascimento: nascimento
             });
-          },
-          error => {
-            console.error('Erro ao buscar funcionário:', error);
+            //  Vai atualizar o título para "Novo Funcionário" quando estiver em modo de edição
+            this.funcionariosService.setTitle('Editar Funcionário');
           }
         );
+      } else {
+        this.isEditMode = false;
+        //  Vai atualizar o título para "Novo Funcionário" quando não estiver em modo de edição
+        this.funcionariosService.setTitle('Novo Funcionário');
       }
     });
   }
 
+  //formatando a data
   formatDate(date: string | Date): string {
     if (typeof date === 'string') {
       date = new Date(date);
@@ -65,6 +72,7 @@ export class FuncionarioFormComponent implements OnInit {
     return `${year}-${month}-${day}`;
   }
 
+  //Atualizando ou enviando um novo funcionario
   onSubmit(): void {
     if (this.funcionarioForm.invalid) {
       console.log('Formulário inválido');
@@ -87,9 +95,6 @@ export class FuncionarioFormComponent implements OnInit {
         response => {
           console.log('Adição bem-sucedida:', response);
           this.router.navigate(['/funcionarios']);
-        },
-        error => {
-          console.error('Erro ao adicionar funcionário:', error);
         }
       );
     }

@@ -1,48 +1,89 @@
 <div>
-  <h2>{{ isEditMode ? 'Editar Funcionário' : 'Adicionar Funcionário' }}</h2>
-  <form [formGroup]="funcionarioForm" (ngSubmit)="onSubmit()">
-    <label>
-      Nome:
-      <input formControlName="nome" required />
-      <div *ngIf="funcionarioForm.get('nome')?.invalid && (funcionarioForm.get('nome')?.dirty || funcionarioForm.get('nome')?.touched)">
-        <small class="error" *ngIf="funcionarioForm.get('nome')?.errors?.['required']">Nome é obrigatório.</small>
-      </div>
-    </label>
-    <label>
-      Gênero:
-      <input formControlName="genero" />
-    </label>
-    <label>
-      Telefone:
-      <input formControlName="telefone" />
-    </label>
-    <label>
-      Nascimento:
-      <input formControlName="nascimento" type="date" required />
-      <div *ngIf="funcionarioForm.get('nascimento')?.invalid && (funcionarioForm.get('nascimento')?.dirty || funcionarioForm.get('nascimento')?.touched)">
-        <small class="error" *ngIf="funcionarioForm.get('nascimento')?.errors?.['required']">Data de nascimento é obrigatória.</small>
-      </div>
-    </label>
-    <label>
-      Estado Civil:
-      <input formControlName="estadocivil" />
-    </label>
-    <label>
-      Rua:
-      <input formControlName="rua" />
-    </label>
-    <label>
-      Número:
-      <input formControlName="numero" type="number" />
-    </label>
-    <label>
-      Complemento:
-      <input formControlName="complemento" />
-    </label>
-    <label>
-      Bairro:
-      <input formControlName="bairro" />
-    </label>
-    <button type="submit" [disabled]="funcionarioForm.invalid">{{ isEditMode ? 'Salvar Alterações' : 'Adicionar' }}</button>
+  <form [formGroup]="funcionarioForm" (ngSubmit)="onSubmit()" class="formulario">
+    <mat-card class="container-campos">
+      <mat-card-content>
+        <div class="form-section">
+          <!-- Nome -->
+          <mat-form-field class='campos-form' appearance="fill">
+            <mat-label>Nome</mat-label>
+            <input matInput formControlName="nome" required />
+            <mat-error class="message-err" *ngIf="funcionarioForm.get('nome')?.invalid && (funcionarioForm.get('nome')?.dirty || funcionarioForm.get('nome')?.touched)">
+              Nome é obrigatório.
+            </mat-error>
+          </mat-form-field>
+
+          <!-- Sexo -->
+          <mat-form-field  class='campos-form' appearance="fill">
+            <mat-label>Sexo</mat-label>
+            <mat-select formControlName="genero">
+              <mat-option value="" disabled>Selecione seu sexo:</mat-option>
+              <mat-option *ngFor="let genero of generos" [value]="genero">{{ genero }}</mat-option>
+            </mat-select>
+          </mat-form-field>
+
+          <!-- Telefone -->
+          <mat-form-field class='campos-form' appearance="fill">
+            <mat-label>Telefone</mat-label>
+            <input matInput formControlName="telefone" />
+          </mat-form-field>
+
+          <!-- Nascimento -->
+          <mat-form-field class='campos-form' appearance="fill">
+            <mat-label>Nascimento</mat-label>
+            <input matInput [matDatepicker]="picker" formControlName="nascimento" required />
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+            <mat-error class="message-err" *ngIf="funcionarioForm.get('nascimento')?.invalid && (funcionarioForm.get('nascimento')?.dirty || funcionarioForm.get('nascimento')?.touched)">
+              Data de nascimento é obrigatória.
+            </mat-error>
+          </mat-form-field>
+
+          <!-- Estado Civil -->
+          <mat-form-field class='campos-form' appearance="fill">
+            <mat-label>Estado Civil</mat-label>
+            <input matInput formControlName="estadocivil" />
+          </mat-form-field>
+        </div>
+
+        <div class="address-section">
+          <!-- Rua -->
+          <mat-form-field class='campos-form' appearance="fill">
+            <mat-label>Rua</mat-label>
+            <input matInput formControlName="rua" />
+          </mat-form-field>
+
+          <!-- Número -->
+          <mat-form-field class='campos-form' appearance="fill">
+            <mat-label>Número</mat-label>
+            <input matInput formControlName="numero" type="number" />
+          </mat-form-field>
+
+          <!-- Complemento -->
+          <mat-form-field class='campos-form' appearance="fill">
+            <mat-label>Complemento</mat-label>
+            <input matInput formControlName="complemento" />
+          </mat-form-field>
+
+          <!-- Cidade -->
+          <mat-form-field class='campos-form' appearance="fill">
+            <mat-label>Cidade</mat-label>
+            <input matInput formControlName="cidade" />
+          </mat-form-field>
+
+          <!-- Estado -->
+          <mat-form-field class='campos-form' appearance="fill">
+            <mat-label>Estado</mat-label>
+            <input matInput formControlName="estado" />
+          </mat-form-field>
+        </div>
+      </mat-card-content>
+
+      <mat-card-actions class="btGroup">
+        <button mat-flat-button class="btEnviar" color="accent" type="submit" [disabled]="funcionarioForm.invalid">
+          {{ isEditMode ? 'Salvar Alterações' : 'Adicionar' }}
+        </button>
+        <button mat-flat-button class="btReturn" color="primary" [routerLink]="['/funcionarios']">Voltar</button>
+      </mat-card-actions>
+    </mat-card>
   </form>
 </div>

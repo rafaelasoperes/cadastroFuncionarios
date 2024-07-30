@@ -1,5 +1,6 @@
 // src/app/app.component.ts
 import { Component } from '@angular/core';
+import { FuncionariosService } from './funcionarios.service';
 
 @Component({
   selector: 'app-root',
@@ -7,6 +8,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'cadastro-funcionarios';
+  title: string | undefined;
+
+  constructor(private funcionariosService: FuncionariosService) {}
+
+  ngOnInit() {
+    this.funcionariosService.currentTitle.subscribe(title => this.title = title);
+  }
 }
 
