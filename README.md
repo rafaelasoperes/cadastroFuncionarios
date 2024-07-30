@@ -54,8 +54,26 @@ npm install
 ```bash
 CREATE DATABASE dbapiCadastros;
 ```
+2 - Tabela modelo;
 
-2 - Configure as variáveis de ambiente do backend. Crie um arquivo variaveis.env na raiz do diretório apiCadastros com as seguintes informações:
+```bash
+CREATE TABLE usuarios (
+     id serial PRIMARY KEY,
+     nome varchar(50),
+     genero varchar(20),
+     telefone varchar (15),
+     nascimento date,
+     estadocivil varchar,
+     rua varchar(40),
+     numero int,
+     complemento varchar(20),
+     bairro varchar(20),
+     cidade varchar(20),
+     estado varchar(20)
+);
+```
+
+3 - Configure as variáveis de ambiente do backend. Crie um arquivo variaveis.env na raiz do diretório apiCadastros com as seguintes informações:
 
 ```bash
 DB_HOST=localhost
